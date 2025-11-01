@@ -10,12 +10,13 @@ import {
   Platform,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient"; // Requires: expo install expo-linear-gradient
-import Icon from "react-native-vector-icons/Feather"; // Requires: expo install @expo/vector-icons
+// import Icon from "react-native-vector-icons/Feather"; // Requires: expo install @expo/vector-icons
+import Icon from "@expo/vector-icons/Feather";
 import { useTheme, ThemeType } from "../context/ThemeContext";
 import useConvexTodos from "../hooks/useConvexTodos";
 
-import TodoList from "../components/TodoList";
-import TodoInput from "../components/TodoInput";
+import TodoList from "../components/common/TodoList";
+import TodoInput from "../components/common/TodoInput";
 
 const { width } = Dimensions.get("window");
 

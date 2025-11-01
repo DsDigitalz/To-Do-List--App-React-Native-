@@ -14,8 +14,8 @@ import DraggableFlatList, {
   ScaleDecorator,
 } from "react-native-draggable-flatlist";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
-import { ThemeType } from "../context/ThemeContext";
-import { Todo } from "../hooks/useConvexTodos";
+import { ThemeType } from "../../context/ThemeContext";
+import { Todo } from "../../hooks/useConvexTodos";
 import TodoItem from "./TodoItem";
 
 type TodoFilter = "all" | "active" | "completed";

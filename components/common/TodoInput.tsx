@@ -1,7 +1,7 @@
 // components/TodoInput.tsx
 import React, { useState } from "react";
 import { View, TextInput, StyleSheet, TouchableOpacity } from "react-native";
-import { ThemeType } from "../context/ThemeContext";
+import { ThemeType } from "../../context/ThemeContext";
 
 interface TodoInputProps {
   handleAddTodo: (title: string, description?: string) => void;
@@ -55,7 +55,7 @@ const TodoInput: React.FC<TodoInputProps> = ({ handleAddTodo, theme }) => {
 
   return (
     // ⚠️ Semantic Markup: View as the form container
-    <View style={styles.inputContainer} accessibilityRole="form">
+    <View style={styles.inputContainer}  accessibilityLabel="New Todo Input Area">
       <View style={styles.fakeCheckCircle} />
 
       <TextInput
