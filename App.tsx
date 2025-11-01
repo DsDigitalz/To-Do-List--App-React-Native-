@@ -1,14 +1,14 @@
 // App.tsx
-import React from 'react';
-import { ThemeProvider } from './context/ThemeContext';
-import { ConvexProviderWithClerk } from 'convex/react'; // or equivalent setup
-import { convex } from './convex'; // Your convex client instance
-import HomeScreen from './screens/HomeScreen';
-import { StatusBar } from 'react-native';
+import React from "react";
+import { ThemeProvider, useTheme } from "./context/ThemeContext";
+import { ConvexProviderWithClerk } from "convex/react"; // Adjust if needed
+import { convex } from "./convex"; // Your Convex client instance
+import HomeScreen from "./screens/HomeScreen";
+import { StatusBar } from "react-native";
 
 const App = () => {
   return (
-    <ConvexProviderWithClerk client={convex} use} /* Replace with your actual Convex setup */ >
+    <ConvexProviderWithClerk client={convex}>
       <ThemeProvider>
         <AppContent />
       </ThemeProvider>
@@ -19,14 +19,17 @@ const App = () => {
 // Component to use the theme and set status bar style
 const AppContent = () => {
   const { theme } = useTheme();
-  
+
   // Set the status bar style based on the theme
-  const barStyle = theme.mode === 'dark' ? 'light-content' : 'dark-content';
-  
+  const barStyle = theme.mode === "dark" ? "light-content" : "dark-content";
+
   return (
     <>
-      <StatusBar barStyle={barStyle} backgroundColor={theme.colors.background} />
-      <HomeScreen /> 
+      <StatusBar
+        barStyle={barStyle}
+        backgroundColor={theme.colors.background}
+      />
+      <HomeScreen />
     </>
   );
 };

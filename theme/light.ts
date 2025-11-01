@@ -12,3 +12,4 @@ export const LightTheme = {
     gradientEnd: '#C058F3',        // Background gradient end
   },
 };
+export type ThemeType = typeof LightTheme;

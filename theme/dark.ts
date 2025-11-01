@@ -12,4 +12,4 @@ export const DarkTheme = {
     gradientEnd: '#464687',
   },
 };
-export type ThemeType = typeof LightTheme;
+// export type ThemeType = typeof LightTheme;

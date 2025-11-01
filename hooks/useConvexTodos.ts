@@ -3,54 +3,74 @@ import { api } from "../convex/_generated/api";
 import { Doc } from "../convex/_generated/dataModel";
 import { useState } from "react";
 
-// Define the type for a Todo item for type safety in the React Native app
 export type Todo = Doc<"todos">;
 
-/**
- * Custom hook to manage fetching and modifying todos using Convex.
- */
 export const useConvexTodos = () => {
   const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
 
-  // Real-time fetching of todos. Whenever the data changes in the DB, this re-runs.
+  // 1. READ
   const todos = useQuery(api.todos.getTodos, { filter });
 
-  // Mutations for CRUD operations
+  // 2. MUTATIONS
   const addTodo = useMutation(api.todos.createTodo);
-  const deleteTodo = useMutation(api.todos.deleteTodo); // Assuming you add this to todos.ts
-  const toggleTodo = useMutation(api.todos.toggleTodo); // Assuming you add this to todos.ts
+  const deleteTodo = useMutation(api.todos.deleteTodo);
+  const toggleTodoMutation = useMutation(api.todos.toggleTodo); // Renamed to avoid confusion
+  const clearCompleted = useMutation(api.todos.clearCompletedTodos);
 
-  // CREATE: Function to add a new todo
+  // CREATE: Function to add a new todo (remains the same)
   const handleAddTodo = async (title: string, description?: string) => {
+    // ... (implementation remains the same) ...
     try {
       await addTodo({ title, description, dueDate: undefined });
     } catch (error) {
       console.error("Failed to add todo:", error);
-      // Implement proper error notification for the user
     }
   };
 
-  // DELETE: Function to remove a todo
+  // DELETE: Function to remove a single todo (remains the same)
   const handleDeleteTodo = async (id: Doc<"todos">["_id"]) => {
+    // ... (implementation remains the same) ...
     try {
-      // Pass the Convex ID for deletion
       await deleteTodo({ id });
     } catch (error) {
       console.error("Failed to delete todo:", error);
     }
   };
 
-  // The 'todos' array is null while loading, so we check for that.
+  // UPDATE: Function to toggle the completion status
+  const handleToggleTodo = async (todo: Todo) => {
+    try {
+      // Pass the new opposite status to the backend
+      await toggleTodoMutation({
+        id: todo._id,
+        isCompleted: !todo.isCompleted,
+      });
+    } catch (error) {
+      console.error("Failed to toggle todo status:", error);
+    }
+  };
+
+  // CLEAR COMPLETED: Function to remove all completed todos
+  const handleClearCompleted = async () => {
+    try {
+      await clearCompleted({});
+    } catch (error) {
+      console.error("Failed to clear completed todos:", error);
+    }
+  };
+
   const loading = todos === undefined;
 
   return {
-    todos: todos || [], // Provide an empty array if loading
+    todos: todos || [],
     loading,
     filter,
     setFilter,
     handleAddTodo,
     handleDeleteTodo,
-    // Add other update/toggle functions here
+    handleToggleTodo, // Export the new update function
+    handleClearCompleted, // Export the new clear function
+    // (Add handleUpdateTodoEdit later for title/description edits)
   };
 };
 

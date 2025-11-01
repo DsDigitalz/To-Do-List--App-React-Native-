@@ -9,16 +9,16 @@ import {
   Text,
   Platform,
 } from "react-native";
-// Use expo-linear-gradient for Expo projects
+Use expo-linear-gradient for Expo projects
 import { LinearGradient } from "expo-linear-gradient";
 import { useTheme, ThemeType } from "../context/ThemeContext";
 import useConvexTodos from "../hooks/useConvexTodos";
 
 // Placeholder Components (to be implemented)
-import TodoList from "../components/TodoList"; // Will handle filtering and drag-sort
-import TodoInput from "../components/TodoInput"; // Will handle adding new todos
+import TodoList from "../components/common/TodoList"; // Will handle filtering and drag-sort
+import TodoInput from "../components/common/TodoInput"; // Will handle adding new todos
 
-const { width } = Dimensions.get("window");
+// const { width } = Dimensions.get("window");
 
 // ⚠️ Semantic markups: View as the container, Text as content
 

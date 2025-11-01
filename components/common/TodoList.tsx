@@ -10,8 +10,8 @@ import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 // For drag-and-sort, we'd use a specialized library, e.g.,
 // import DraggableFlatList from 'react-native-draggable-flatlist';
 
-import { useTheme, ThemeType } from "../context/ThemeContext";
-import { Todo } from "../hooks/useConvexTodos";
+import { useTheme, ThemeType } from "../../context/ThemeContext";
+import { Todo } from "../../hooks/useConvexTodos";
 import TodoItem from "./TodoItem"; // The animated item component
 
 // Define the filter types
