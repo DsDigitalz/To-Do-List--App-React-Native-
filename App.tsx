@@ -1,20 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// App.tsx
+import React from 'react';
+import { ThemeProvider } from './context/ThemeContext';
+import { ConvexProviderWithClerk } from 'convex/react'; // or equivalent setup
+import { convex } from './convex'; // Your convex client instance
+import HomeScreen from './screens/HomeScreen';
+import { StatusBar } from 'react-native';
 
-export default function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ConvexProviderWithClerk client={convex} use} /* Replace with your actual Convex setup */ >
+      <ThemeProvider>
+        <AppContent />
+      </ThemeProvider>
+    </ConvexProviderWithClerk>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// Component to use the theme and set status bar style
+const AppContent = () => {
+  const { theme } = useTheme();
+  
+  // Set the status bar style based on the theme
+  const barStyle = theme.mode === 'dark' ? 'light-content' : 'dark-content';
+  
+  return (
+    <>
+      <StatusBar barStyle={barStyle} backgroundColor={theme.colors.background} />
+      <HomeScreen /> 
+    </>
+  );
+};
+
+export default App;
